@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/doabit/semantic-ui-sass.git
+  revision: 79b8bee79bacf79a0bc665830989eb83cdea0055
+  specs:
+    semantic-ui-sass (2.2.2.2)
+      sass (>= 3.2)
+
+GIT
   remote: git://github.com/plataformatec/devise.git
   revision: 2a5f8b6688cdc088fcebd3da055b4d3ce38139e4
   specs:
@@ -59,9 +66,6 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.3.7)
-      autoprefixer-rails (>= 5.2.1)
-      sass (>= 3.3.4)
     builder (3.2.2)
     byebug (9.0.5)
     coderay (1.1.1)
@@ -190,7 +194,6 @@ DEPENDENCIES
   autoprefixer-rails
   better_errors
   binding_of_caller
-  bootstrap-sass
   devise!
   figaro
   font-awesome-sass
@@ -204,6 +207,7 @@ DEPENDENCIES
   rails (= 5.0.0)
   redis
   sass-rails
+  semantic-ui-sass!
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
