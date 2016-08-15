@@ -10,10 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815153857) do
+ActiveRecord::Schema.define(version: 20160815160853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "listings", force: :cascade do |t|
+    t.string   "brand"
+    t.string   "model"
+    t.string   "title"
+    t.integer  "mileage"
+    t.text     "description"
+    t.integer  "price"
+    t.integer  "year"
+    t.string   "condition"
+    t.string   "origin"
+    t.string   "city"
+    t.integer  "user_id"
+    t.boolean  "is_sold"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["user_id"], name: "index_listings_on_user_id", using: :btree
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.text     "comment"
+    t.integer  "listing_id"
+    t.integer  "user_id"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["listing_id"], name: "index_requests_on_listing_id", using: :btree
+    t.index ["user_id"], name: "index_requests_on_user_id", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -28,8 +57,14 @@ ActiveRecord::Schema.define(version: 20160815153857) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "city"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "listings", "users"
+  add_foreign_key "requests", "listings"
+  add_foreign_key "requests", "users"
 end
