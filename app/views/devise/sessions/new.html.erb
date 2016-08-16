@@ -1,15 +1,37 @@
-<h2>Log in</h2>
+<div class="ui middle aligned content center aligned grid login-screen">
+	<div class="column">
+		<h2 class="ui teal image header">
+			<div class="content">
+				Log in
+			</div>
+		</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email, required: false, autofocus: true %>
-    <%= f.input :password, required: false %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-  </div>
+		<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), :html=> {class: 'ui large form'}) do |f| %>
+		<div class="ui grid">
+			<div class="two wide column push"></div>
+			<div class="twelve wide column push">
+				<div class="ui stacked segment">
+					<div class="field">
+						<div class="ui left icon input">
+							<%= f.input :email, label:false, placeholder:'Username', required: false, autofocus: true, class: 'ui left icon input' %>
+						</div>
+					</div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
+					<div class="field">
+						<div class="ui left icon input">
+							<%= f.input :password, label:false, placeholder: 'Password', required: false %>
+						</div>
+						<%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+					</div>
+					<div class="form-actions">
+						<%= f.button :submit, "Log in", class:'ui fluid large teal submit button' %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% end %>
+		<%= render "devise/shared/links" %>
+	</div>
+</div>
 
-<%= render "devise/shared/links" %>
+
