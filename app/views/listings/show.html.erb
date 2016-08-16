@@ -1,3 +1,5 @@
 <%= @listing.title %>
 
-Just testing, yo.
+<div>
+<%= link_to 'request this car', listing_requests_path(@listing), method: :post, class:'ui yellow button' %>
+</div>
