@@ -8,4 +8,10 @@
 
 // Your CSS
 @import "pages/index.scss";
-@import "layout/_footer.scss"
+@import "layout/_footer.scss";
+@import "layout/_navbar.scss";
+@import "layout/_card.scss";
+
+.main-content {
+  margin-top: 60px;
+}
