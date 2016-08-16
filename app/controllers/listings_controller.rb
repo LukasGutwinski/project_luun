@@ -17,7 +17,10 @@ class ListingsController < ApplicationController
 
   def create
     @listing = Listing.new(listing_params)
-    @listing.user = current_user
+
+    #doing this for testing purposes until the login module is added
+    @listing.user = User.find(1)
+    # @listing.user = current_user
     @listing.save
 
     redirect_to listings_path(@listing)
@@ -36,7 +39,7 @@ class ListingsController < ApplicationController
   private
 
   def listing_params
-    params.require(:listing).permit(:brand, :model, :title, :mileage, :description, :price, :year, :condition, :origin, :city)
+    params.require(:listing).permit(:brand, :photo, :photo_cache, :model, :title, :mileage, :description, :price, :year, :condition, :origin, :city)
   end
 
   def set_listing
