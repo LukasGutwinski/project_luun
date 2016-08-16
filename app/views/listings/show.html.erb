@@ -1,4 +1,17 @@
-<%= @listing.title %>
+<h2><%= @listing.title %></h2>
+<% @listing.photos.each do |photo| %>
+  <%= cl_image_tag photo.path, width: 300 %>
+<% end %>
+<p>Description: <%= @listing.description %></p>
+<p>Brand: <%= @listing.brand %></p>
+<p>Model: <%= @listing.model %></p>
+<p>Mileage: <%= @listing.mileage %></p>
+<p>Price: <%= @listing.price %></p>
+<p>Year: <%= @listing.year %></p>
+<p>Condition: <%= @listing.condition %></p>
+<p>Origin: <%= @listing.origin %></p>
+<p>City: <%= @listing.city %></p>
+<p>Seller: <%= @listing.user.first_name %> <%= @listing.user.last_name %></p>
 
 <div>
 <%= link_to 'request this car', listing_requests_path(@listing), method: :post, class:'ui yellow button' %>
