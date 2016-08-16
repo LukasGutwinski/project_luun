@@ -23,7 +23,6 @@ class ListingsController < ApplicationController
     # @listing.user = User.find(1)
     @listing.user = current_user
     @listing.save
-
     redirect_to listings_path(@listing)
   end
 

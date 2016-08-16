@@ -7,7 +7,6 @@ class RequestsController < ApplicationController
     @request.status = "Waiting for approval"
     @request.listing = Listing.find(params[:listing_id])
     @request.save
-    raise
   end
 
   private
