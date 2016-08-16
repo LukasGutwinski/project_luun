@@ -3,3 +3,8 @@
 <div>
 <%= link_to 'request this car', listing_requests_path(@listing), method: :post, class:'ui yellow button' %>
 </div>
+
+<%= simple_form_for [@listing,@request] do |f| %>
+<%= f.input :comment %>
+<%= f.button :submit %>
+<% end %>
