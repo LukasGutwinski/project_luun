@@ -1,1 +1,51 @@
 @import "home";
+
+.banner {
+    background-size: cover;
+    height: 70vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #FFF;
+    text-align: center;
+    position: relative;
+}
+
+.banner h1 {
+  font-size: 105px;
+}
+
+.banner p {
+  font-size: 33px;
+}
+
+#from-dropdown,
+#to-dropdown {
+  min-width: 80px;
+}
+
+.vehicle-filters {
+  text-align:left;
+}
+
+.filter-dropdowns {
+  margin: 10px 0;
+}
+
+.section-title {
+  text-align: center;
+  margin: 30px 0!important;
+}
+
+.car-overview {
+  text-align: center;
+}
+
+.dealer-logo {
+  max-width: 150px;
+}
+
+#featured-dealers {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}

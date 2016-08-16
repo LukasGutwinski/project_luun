@@ -1,0 +1,23 @@
+.navbar {
+  background-color: rgba(255, 255, 255, 0.8);
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .logo {
+  font-size: 30px;
+  color: #2185D0;
+  font-weight: bold;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.navbar .cta-buttons {
+  padding: 0 20px;
+}
