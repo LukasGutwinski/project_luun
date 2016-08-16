@@ -1,2 +1,88 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="banner" style="background-image:linear-gradient(-225deg, rgba(30,30,30,0.6) 30%, rgba(46,46,46,0.5) 80%), url('https://images.unsplash.com/photo-1452399143781-59763f14edb0?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1001&q=80&cs=tinysrgb')">
+  <div class="banner-content">
+    <h1>Find a new car!</h1>
+    <div class="vehicle-filters">
+      <div class="vehecle-type-selector">
+        <button class="ui yellow icon button">
+          <i class="fa fa-car"></i>
+        </button>
+        <button class="ui icon button">
+          <i class="fa fa-motorcycle"></i>
+        </button>
+      </div>
+
+      <div class="filter-dropdowns">
+        <div class="ui selection dropdown" id="brand-dropdown">
+          <i class="dropdown icon"></i>
+          <div class="text">Brand</div>
+          <div class="menu">
+            <div class="item">Tesla</div>
+            <div class="item">Audi</div>
+            <div class="item">Volkswagen</div>
+          </div>
+        </div>
+        <div class="ui selection dropdown" id="model-dropdown">
+          <i class="dropdown icon"></i>
+          <div class="text">Model</div>
+          <div class="menu">
+            <div class="item">Tesla</div>
+            <div class="item">Audi</div>
+            <div class="item">Volkswagen</div>
+          </div>
+        </div>
+        <div class="ui selection dropdown" id="from-dropdown">
+          <i class="dropdown icon"></i>
+          <div class="text">From</div>
+          <div class="menu">
+            <div class="item">0 €</div>
+            <div class="item">100 €</div>
+            <div class="item">1000 €</div>
+          </div>
+        </div>
+        <div class="ui selection dropdown" id="to-dropdown">
+          <i class="dropdown icon"></i>
+          <div class="text">To</div>
+          <div class="menu">
+            <div class="item">0 €</div>
+            <div class="item">100 €</div>
+            <div class="item">1000 €</div>
+          </div>
+        </div>
+        <div class="ui selection dropdown" id="location-dropdown">
+          <i class="dropdown icon"></i>
+          <div class="text">Location</div>
+          <div class="menu">
+            <div class="item">Vienna</div>
+            <div class="item">Brussels</div>
+            <div class="item">Siem Reap</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ui primary big animated button" tabindex="0">
+      <div class="hidden content"><i class="fa fa-car" aria-hidden="true"></i></div>
+      <div class="visible content">
+        Let's go!
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui container" id="car-overview">
+  <h1 class="section-title">Popular Cars</h1>
+</div>
+<div class="ui container" id="featured-dealers">
+  <h1 class="section-title">Featured Dealers</h1>
+</div>
+
+<%= render 'layouts/footer' %>
+
+
+<script type="text/javascript">
+  $('#brand-dropdown').dropdown();
+  $('#model-dropdown').dropdown();
+  $('#from-dropdown').dropdown();
+  $('#to-dropdown').dropdown();
+  $('#location-dropdown').dropdown();
+</script>
