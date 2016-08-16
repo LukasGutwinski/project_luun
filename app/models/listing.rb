@@ -1,4 +1,4 @@
 class Listing < ApplicationRecord
   belongs_to :user
-  mount_uploader :photo, PhotoUploader
+  has_attachments :photos, maximum: 10
 end
