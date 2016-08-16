@@ -1,8 +1,19 @@
 <div class="navbar">
-  <div class="logo"><i class="fa fa-car" aria-hidden="true"></i> Luun</div>
+  <%= link_to root_path do %>
+    <div class="logo"><i class="fa fa-car" aria-hidden="true"></i> Luun</div>
+  <% end %>
 
   <div class="ui right cta-buttons">
   	<%= link_to 'Post car', new_listing_path, class:'ui yellow button' %>
-    <%= link_to 'Sign In', new_user_session_path, class:'ui blue button' %>
+    <% if user_signed_in? %>
+      <%= link_to 'Log out', destroy_user_session_path, method: :delete, class:'ui blue button' %>
+    <% else %>
+      <%= link_to 'Sign in', new_user_session_path, class:'ui blue button' %>
+    <% end %>
   </div>
 </div>
+
+
+
+
+
