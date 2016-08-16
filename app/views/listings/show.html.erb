@@ -12,3 +12,12 @@
 <p>Origin: <%= @listing.origin %></p>
 <p>City: <%= @listing.city %></p>
 <p>Seller: <%= @listing.user.first_name %> <%= @listing.user.last_name %></p>
+
+<div>
+<%= link_to 'request this car', listing_requests_path(@listing), method: :post, class:'ui yellow button' %>
+</div>
+
+<%= simple_form_for [@listing,@request] do |f| %>
+<%= f.input :comment %>
+<%= f.button :submit %>
+<% end %>
