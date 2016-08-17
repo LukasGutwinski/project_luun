@@ -1,20 +1,70 @@
-<h2><%= @listing.title %></h2>
-<% @listing.photos.each do |photo| %>
-<%= cl_image_tag photo.path, width: 300 %>
-<% end %>
+<div class="listing-page">
+  <div class="banner" style="background-image:linear-gradient(-225deg, rgba(30,30,30,0.6) 30%, rgba(46,46,46,0.5) 80%), url('<%= @listing.photos.first.fullpath %>')">
+    <div class="banner-content">
 
-<p>Description: <%= @listing.description %></p>
-<p>Brand: <%= @listing.brand %></p>
-<p>Model: <%= @listing.model %></p>
-<p>Mileage: <%= @listing.mileage %></p>
-<p>Price: <%= @listing.price %></p>
-<p>Year: <%= @listing.year %></p>
-<p>Condition: <%= @listing.condition %></p>
-<p>Origin: <%= @listing.origin %></p>
-<p>City: <%= @listing.city %></p>
-<p>Seller: <%= @listing.user.first_name %> <%= @listing.user.last_name %></p>
+    <div class="go-back">
+      <%= link_to listings_path do %>
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        Go back to all listings
+      <% end %>
+    </div>
+      <h1><%= @listing.title %></h1>
 
-<%= simple_form_for [@listing,@request] do |f| %>
-<%= f.input :comment %>
-<%= f.button :submit, data: { confirm: "Are you sure?"} %>
-<% end %>
+    </div>
+  </div>
+  <div class="ui container">
+    <h2 class="section-title">Details</h2>
+
+    <h2><%= @listing.title %></h2>
+    <% @listing.photos.each do |photo| %>
+    <%= cl_image_tag photo.path, width: 300 %>
+    <% end %>
+    <table class="ui celled table">
+        <tbody>
+          <tr>
+            <td>
+                <strong>Brand:</strong>
+            </td>
+            <td><%= @listing.brand %></td>
+          </tr>
+          <tr>
+            <td><strong>Model:</strong></td>
+            <td>Brand: <%= @listing.model %></td>
+          </tr>
+          <tr>
+            <td><strong>Mileage:</strong></td>
+            <td><%= @listing.mileage %></td>
+          </tr>
+          <tr>
+            <td><strong>Price:</strong></td>
+            <td><%= @listing.price %></td>
+          </tr>
+          <tr>
+            <td><strong>Condition:</strong></td>
+            <td><%= @listing.condition %></td>
+          </tr>
+          <tr>
+            <td><strong>Origin:</strong></td>
+            <td><%= @listing.origin %></td>
+          </tr>
+          <tr>
+            <td><strong>Seller:</strong></td>
+            <td><%= @listing.user.first_name %> <%= @listing.user.last_name %></td>
+          </tr>
+        </tbody>
+      </table>
+
+  <div style="margin-bottom:80px">
+    <%= link_to "Delete", listing_path(@listing),
+    method: :delete,
+    data: { confirm: "Are you sure?" }, class: "ui low-opacity button" %>
+    <%= link_to "Edit", edit_listing_path(@listing), class: "ui low-opacity button" %>
+  </div>
+</div>
+<div id="request">
+  <%= simple_form_for [@listing,@request] do |f| %>
+  <%= f.input :comment %>
+  <%= f.button :submit, data: { confirm: "Are you sure?"} %>
+  <% end %>
+</div>
+</div>

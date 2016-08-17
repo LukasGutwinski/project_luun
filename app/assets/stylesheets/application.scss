@@ -11,9 +11,15 @@
 @import "layout/_footer.scss";
 @import "layout/_navbar.scss";
 @import "layout/_card.scss";
+@import "listings/index.scss";
+@import "listings/show.scss";
 
 .main-content {
-  margin-top: 60px;
+  padding-top: 60px;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 200px;
+  background-color: #f7f7f7;
 }
 
 .form-container {
