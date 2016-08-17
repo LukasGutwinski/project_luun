@@ -6,6 +6,9 @@
     <p><%= "Brand: #{request.listing.brand}" %></p>
     <p><%= "Model: #{request.listing.model}" %></p>
     <p><%= "Status: #{request.status}" %></p>
+    <% if request.status == "Approved" %>
+    <p>Congratulations your request has been approved. Please contact the seller via <%= mail_to request.listing.user.email %></p>
+    <% end %>
   </li>
   <% end %>
 </ul>

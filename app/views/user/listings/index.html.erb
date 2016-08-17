@@ -3,10 +3,13 @@
 <ul>
   <% @listings.each do |listing| %>
   <li>
-    <%= listing.brand %>
-    <%= listing.model %>
-    <%= link_to 'details', listing_path(listing) %>
-    <%= link_to 'request for this car', listing_requests_path(listing)%>
+    <h2>
+      <%= listing.brand %>
+      <%= listing.model %>
+    </h2>
+    <p>Number of requests for this car: <strong><%= listing.requests.count %></strong>  </p>
+    <%= link_to 'details', listing_path(listing), class: 'ui yellow button' %>
+    <%= link_to 'request for this car', listing_requests_path(listing), class: 'ui green button'%>
   </li>
   <% end %>
 </ul>
