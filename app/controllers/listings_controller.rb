@@ -13,6 +13,7 @@ class ListingsController < ApplicationController
     @listings = Listing.search @search_term, fields: [:brand, :model]
     @listings = @listings.select{ |listing| @min_price <= listing.price && listing.price <= @max_price }
 
+    session[:query_string] = request.query_parameters.to_query
     # @listings = Listing.search "#{params[:brand]} #{params[:model]}", fields: [:brand, :model]
     # @listings = Listing.search "#{params[:brand]} #{params[:model]}", fields: [:brand, :model], query: {query_string: {query: price_range}}
     # @listings = Listing.search "#{params[:brand]} #{params[:model]}", fields: [:brand, :model], where("price < ?", params[:max_price])
@@ -20,6 +21,7 @@ class ListingsController < ApplicationController
 
   def show
     @request = Request.new
+    @query_string = session[:query_string]
   end
 
   def new
