@@ -1,8 +1,48 @@
 <div class="navbar">
+  <%= link_to root_path do %>
   <div class="logo"><i class="fa fa-car" aria-hidden="true"></i> Luun</div>
+  <% end %>
 
   <div class="ui right cta-buttons">
-    <a href="" class="ui yellow button">Post Car</a>
-    <a href="" class="ui button">Sign In</a>
+
+    <% unless current_page?(new_listing_path) %>
+    <%= link_to 'Post car', new_listing_path, class:'ui yellow button' %>
+    <% end %>
+    <% if user_signed_in? %>
+    <span>
+      <div class="ui inline dropdown" style="min-width: 100px;">
+        <div class="text">
+<!--           <% if user_signed_in? && current_user.facebook_picture_url %>
+            <%= image_tag current_user.facebook_picture_url, height: 50, width: 50 %>
+          <% end %> -->
+          <%= current_user.first_name %> <%= current_user.last_name %>
+        </div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="item">
+            My requests
+          </div>
+          <div class="item">
+            My listings
+          </div>
+          <div class="item">
+            <%= link_to 'My profile', edit_user_registration_path %>
+          </div>
+          <div class="item">
+            <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+          </div>
+        </div>
+      </div>
+    </span>
+    <% else %>
+    <%= link_to 'Sign in', new_user_session_path, class:'ui blue button' %>
+    <% end %>
   </div>
 </div>
+
+
+
+<script>
+  $('.ui.dropdown').dropdown();
+</script>
+
