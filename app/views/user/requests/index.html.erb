@@ -1,4 +1,11 @@
-<% @requests.each do |request| %>
-<div> <%= request.comment %> </div>
-<div> <%= request.listing.model %> </div>
-<% end %>
+<h1>Here are the cars you want you buy</h1>
+
+<ul>
+  <% @requests.each do |request| %>
+  <li>
+    <p><%= "Brand: #{request.listing.brand}" %></p>
+    <p><%= "Model: #{request.listing.model}" %></p>
+    <p><%= "Status: #{request.status}" %></p>
+  </li>
+  <% end %>
+</ul>
