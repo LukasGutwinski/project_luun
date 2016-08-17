@@ -1,6 +1,7 @@
 <div class="banner" style="background-image:linear-gradient(-225deg, rgba(30,30,30,0.6) 30%, rgba(46,46,46,0.5) 80%), url('https://images.unsplash.com/photo-1452399143781-59763f14edb0?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1001&q=80&cs=tinysrgb')">
   <div class="banner-content">
     <h1>Find a new car!</h1>
+
     <div class="vehicle-filters">
       <div class="vehecle-type-selector">
         <button class="ui yellow icon button">
@@ -10,64 +11,51 @@
           <i class="fa fa-motorcycle"></i>
         </button>
       </div>
+      <!-- start -->
+      <form action="/listings" name="search-bar">
+        <div class="filter-dropdowns">
 
-      <div class="filter-dropdowns">
-        <div class="ui selection dropdown" id="brand-dropdown">
-          <i class="dropdown icon"></i>
-          <div class="text">Brand</div>
-          <div class="menu">
-            <div class="item">Tesla</div>
-            <div class="item">Audi</div>
-            <div class="item">Volkswagen</div>
-          </div>
-        </div>
-        <div class="ui selection dropdown" id="model-dropdown">
-          <i class="dropdown icon"></i>
-          <div class="text">Model</div>
-          <div class="menu">
-            <div class="item">Tesla</div>
-            <div class="item">Audi</div>
-            <div class="item">Volkswagen</div>
-          </div>
-        </div>
-        <div class="ui selection dropdown" id="from-dropdown">
-          <i class="dropdown icon"></i>
-          <div class="text">From</div>
-          <div class="menu">
-            <div class="item">0 €</div>
-            <div class="item">100 €</div>
-            <div class="item">1000 €</div>
-          </div>
-        </div>
-        <div class="ui selection dropdown" id="to-dropdown">
-          <i class="dropdown icon"></i>
-          <div class="text">To</div>
-          <div class="menu">
-            <div class="item">0 €</div>
-            <div class="item">100 €</div>
-            <div class="item">1000 €</div>
-          </div>
-        </div>
-        <div class="ui selection dropdown" id="location-dropdown">
-          <i class="dropdown icon"></i>
-          <div class="text">Location</div>
-          <div class="menu">
-            <div class="item">Vienna</div>
-            <div class="item">Brussels</div>
-            <div class="item">Siem Reap</div>
-          </div>
+          <select name="brand" class="ui search dropdown">
+            <option value="">Brand</option>
+            <option value="bmw">BMW</option>
+            <option value="audi">Audi</option>
+            <option value="vw">Volkswagen</option>
+          </select>
+          <select name="model" class="ui search dropdown">
+            <option value="">Model</option>
+            <option value="Series 3">Series 3</option>
+            <option value="C">C class</option>
+            <option value="AZ">Arizona</option>
+            <option value="WI">Wisconsin</option>
+            <option value="WY">Wyoming</option>
+          </select>
+          <select name="min_price" class="ui search dropdown">
+            <option value="">Min price</option>
+            <option value="0">0</option>
+            <option value="5000">10000</option>
+            <option value="50000">50000</option>
+            <option value="100000">100000</option>
+          </select>
+          <select name="max_price" class="ui search dropdown">
+            <option value="">Max price</option>
+            <option value="5000">5000</option>
+            <option value="10000">10000</option>
+            <option value="50000">50000</option>
+            <option value="100000">100000</option>
+          </select>
         </div>
       </div>
-
-    </div>
-    <div class="ui primary big animated button" tabindex="0">
-      <div class="hidden content"><i class="fa fa-car" aria-hidden="true"></i></div>
-      <div class="visible content">
-        Let's go!
+      <div class="ui primary big animated button" tabindex="0" onClick="document.forms['search-bar'].submit();">
+        <div class="hidden content"><i class="fa fa-car" aria-hidden="true"></i></div>
+        <div class="visible content">
+          Let's go!
+        </div>
       </div>
     </div>
   </div>
-</div>
+    </form>
+    <!-- end -->
+
 
 <div class="ui container" id="car-overview">
   <h1 class="section-title">Popular Cars</h1>
@@ -118,7 +106,9 @@
   </div>
 </div>
 
-
+<script>
+  $('.ui.dropdown').dropdown();
+</script>
 
 <script type="text/javascript">
   $('#brand-dropdown').dropdown();

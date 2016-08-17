@@ -1,6 +1,6 @@
 <h2><%= @listing.title %></h2>
 <% @listing.photos.each do |photo| %>
-<%= cl_image_tag photo.path, width: 300 %>
+<%#= cl_image_tag photo.path, width: 300 %>
 <% end %>
 
 <p>Description: <%= @listing.description %></p>
