@@ -17,9 +17,7 @@ gem "coffee-rails"
 gem "carrierwave"
 gem 'searchkick'
 gem 'bonsai-elasticsearch-rails'
-
-
-
+gem 'elasticsearch-model'
 
 gem 'sass-rails'
 gem 'jquery-rails'
