@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :requests do
       member do
         put :approve
+        put :cancel_approval
       end
     end
   end

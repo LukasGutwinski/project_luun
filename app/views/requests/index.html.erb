@@ -2,10 +2,13 @@
 
 <ul>
   <% @requests.each do |request| %>
-    <p><%= "You have received a request from #{request.user.first_name} #{request.user.last_name}." %> </p>
-    <p><%= "His comment: #{request.comment}" %> <p>
+  <p><%= "You have received a request from #{request.user.first_name} #{request.user.last_name}." %> </p>
+  <p><%= "His comment: #{request.comment}" %> <p>
     <p><%= "Status: #{request.status}" %> <p>
-
-    <%= link_to "Approve the listing", approve_listing_request_path(@listing, request), method: :put, data: { confirm: "Are you sure?" } %>
-  <% end %>
-</ul>
+      <% if request.status == "Waiting for approval" %>
+      <%= link_to "Approve the listing", approve_listing_request_path(@listing, request), method: :put, data: { confirm: "Are you sure?" }, class:'ui green button' %>
+      <% else %>
+      <%= link_to "Cancel the approval", cancel_approval_listing_request_path(@listing, request), method: :put, data: { confirm: "Are you sure?"}, class:'ui red button' %>
+      <% end %>
+      <% end %>
+    </ul>

@@ -1,23 +1,25 @@
-<%= simple_form_for(@listing) do |f| %>
-  <% if @listing.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-      <% @listing.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+<div class="ui container">
+  <%= simple_form_for(@listing) do |f| %>
+    <% if @listing.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+        <% @listing.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= f.input :brand, as: :select, collection: @brands %>
+    <%= f.input :model %>
+    <%= f.input :title %>
+    <%= f.input :mileage %>
+    <%= f.input :description %>
+    <%= f.input :price %>
+    <%= f.input :year %>
+    <%= f.input :condition, as: :select, collection: @conditions %>
+    <%= f.input :origin %>
+    <%= f.input :city %>
+    <%= f.input :photos, as: :attachinary %>
+    <%= f.button :submit %>
   <% end %>
-  <%= f.input :brand, as: :select, collection: @brands %>
-  <%= f.input :model %>
-  <%= f.input :title %>
-  <%= f.input :mileage %>
-  <%= f.input :description %>
-  <%= f.input :price %>
-  <%= f.input :year %>
-  <%= f.input :condition, as: :select, collection: @conditions %>
-  <%= f.input :origin %>
-  <%= f.input :city %>
-  <%= f.input :photos, as: :attachinary %>
-  <%= f.button :submit %>
-<% end %>
+</div>
