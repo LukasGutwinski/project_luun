@@ -12,9 +12,9 @@
     <span>
       <div class="ui inline dropdown" style="min-width: 100px;">
         <div class="text">
-          <% if user_signed_in? && current_user.facebook_picture_url %>
+<!--           <% if user_signed_in? && current_user.facebook_picture_url %>
             <%= image_tag current_user.facebook_picture_url, height: 50, width: 50 %>
-          <% end %>
+          <% end %> -->
           <%= current_user.first_name %> <%= current_user.last_name %>
         </div>
         <i class="dropdown icon"></i>
