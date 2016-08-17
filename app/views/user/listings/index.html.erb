@@ -1,0 +1,12 @@
+<h1>Here are the cars you've listed</h1>
+
+<ul>
+  <% @listings.each do |listing| %>
+  <li>
+    <%= listing.brand %>
+    <%= listing.model %>
+    <%= link_to 'details', listing_path(listing) %>
+    <%= link_to 'request for this car', listing_requests_path(listing)%>
+  </li>
+  <% end %>
+</ul>
