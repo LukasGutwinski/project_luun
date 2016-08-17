@@ -21,6 +21,14 @@ class RequestsController < ApplicationController
     @request.save
   end
 
+  def cancel_approval
+    @listing = Listing.find(params[:listing_id])
+    @request = Request.find(params[:id])
+    @request.cancel_approval
+    @request.save
+  end
+
+
   private
 
   def request_params

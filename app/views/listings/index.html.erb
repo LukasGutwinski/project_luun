@@ -1,6 +1,6 @@
 <ul>
   <% @listings.each do |listing| %>
-    <li>
+  <li>
     <h3><%= link_to listing.title, listing_path(listing) %></h3>
     <%= cl_image_tag listing.photos.first.path, width: 300 %>
     <p>Price: <%= listing.price %></p>
@@ -12,7 +12,7 @@
       method: :delete,
       data: { confirm: "Are you sure?" } %></p>
     </li>
-  <% end %>
-</ul>
+    <% end %>
+  </ul>
 
-<%= link_to "Add new listing", new_listing_path %>
+  <%= link_to "Add new listing", new_listing_path %>
