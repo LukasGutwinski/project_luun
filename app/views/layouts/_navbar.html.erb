@@ -4,7 +4,9 @@
   <% end %>
 
   <div class="ui right cta-buttons">
+  <% unless current_page?(new_listing_path) %>
   	<%= link_to 'Post car', new_listing_path, class:'ui yellow button' %>
+  <% end %>
     <% if user_signed_in? %>
       <%= link_to 'Log out', destroy_user_session_path, method: :delete, class:'ui blue button' %>
     <% else %>
