@@ -1,3 +1,6 @@
+<% if @requests.size == 0 %>
+<h1>You haven't requested any vehicles yet</h1>
+<% else %>
 <h1>Here are your requests</h1>
 
 <ul>
@@ -12,3 +15,4 @@
   </li>
   <% end %>
 </ul>
+<% end %>
