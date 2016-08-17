@@ -16,6 +16,7 @@ gem "jquery-fileupload-rails"
 gem "coffee-rails"
 gem "carrierwave"
 gem 'searchkick'
+gem 'bonsai-elasticsearch-rails'
 
 
 
