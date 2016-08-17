@@ -2,7 +2,7 @@
   <div class="banner" style="background-image:linear-gradient(-225deg, rgba(30,30,30,0.6) 30%, rgba(46,46,46,0.5) 80%), url('<%= @listing.photos.first.fullpath %>')">
     <div class="banner-content">
     <div class="go-back">
-      <%= link_to listings_path do %>
+      <%= link_to 'http://luun.herokuapp.com/listings?brand=&model=&min_price=&max_price=' do %>
         <i class="fa fa-arrow-left" aria-hidden="true"></i>
         Go back to all listings
       <% end %>

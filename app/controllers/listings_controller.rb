@@ -2,7 +2,6 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
 
   def index
-
     params[:max_price] == "" ? @max_price = 999999 : @max_price = params[:max_price].to_i
     params[:min_price] == "" ? @min_price = 0 : @min_price = params[:min_price].to_i
     if params[:brand] == "" && params[:model] == ""

@@ -75,6 +75,7 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bonsai-elasticsearch-rails (0.0.4)
     builder (3.2.2)
     byebug (9.0.5)
     carrierwave (0.11.2)
@@ -103,6 +104,10 @@ GEM
       elasticsearch-transport (= 2.0.0)
     elasticsearch-api (2.0.0)
       multi_json
+    elasticsearch-model (0.1.9)
+      activesupport (> 3)
+      elasticsearch (> 0.4)
+      hashie
     elasticsearch-transport (2.0.0)
       faraday
       multi_json
@@ -270,10 +275,12 @@ DEPENDENCIES
   autoprefixer-rails
   better_errors
   binding_of_caller
+  bonsai-elasticsearch-rails
   carrierwave
   cloudinary (= 1.1.0)
   coffee-rails
   devise!
+  elasticsearch-model
   figaro
   font-awesome-sass
   jbuilder (~> 2.0)
