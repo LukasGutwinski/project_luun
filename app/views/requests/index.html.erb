@@ -1,0 +1,11 @@
+<h1>Here are the requests for your car: </h1>
+
+<ul>
+  <% @requests.each do |request| %>
+    <p><%= "You have received a request from #{request.user.first_name} #{request.user.last_name}." %> </p>
+    <p><%= "His comment: #{request.comment}" %> <p>
+    <p><%= "Status: #{request.status}" %> <p>
+
+    <%= link_to "Approve the listing", approve_listing_request_path(@listing, request), method: :put, data: { confirm: "Are you sure?" } %>
+  <% end %>
+</ul>

@@ -1,7 +1,8 @@
 <h2><%= @listing.title %></h2>
 <% @listing.photos.each do |photo| %>
-  <%= cl_image_tag photo.path, width: 300 %>
+<%= cl_image_tag photo.path, width: 300 %>
 <% end %>
+
 <p>Description: <%= @listing.description %></p>
 <p>Brand: <%= @listing.brand %></p>
 <p>Model: <%= @listing.model %></p>
@@ -13,11 +14,7 @@
 <p>City: <%= @listing.city %></p>
 <p>Seller: <%= @listing.user.first_name %> <%= @listing.user.last_name %></p>
 
-<div>
-<%= link_to 'request this car', listing_requests_path(@listing), method: :post, class:'ui yellow button' %>
-</div>
-
 <%= simple_form_for [@listing,@request] do |f| %>
 <%= f.input :comment %>
-<%= f.button :submit %>
+<%= f.button :submit, data: { confirm: "Are you sure?"} %>
 <% end %>
