@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816123033) do
+ActiveRecord::Schema.define(version: 20160818142529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,20 @@ ActiveRecord::Schema.define(version: 20160816123033) do
     t.index ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent", using: :btree
   end
 
+  create_table "brand_models", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "brand_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["brand_id"], name: "index_brand_models_on_brand_id", using: :btree
+  end
+
+  create_table "brands", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "listings", force: :cascade do |t|
     t.string   "brand"
     t.string   "model"
@@ -42,10 +56,14 @@ ActiveRecord::Schema.define(version: 20160816123033) do
     t.string   "origin"
     t.string   "city"
     t.integer  "user_id"
-    t.boolean  "is_sold",     default: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.boolean  "is_sold",        default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "photo"
+    t.integer  "brand_id"
+    t.integer  "brand_model_id"
+    t.index ["brand_id"], name: "index_listings_on_brand_id", using: :btree
+    t.index ["brand_model_id"], name: "index_listings_on_brand_model_id", using: :btree
     t.index ["user_id"], name: "index_listings_on_user_id", using: :btree
   end
 
@@ -85,6 +103,9 @@ ActiveRecord::Schema.define(version: 20160816123033) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "brand_models", "brands"
+  add_foreign_key "listings", "brand_models"
+  add_foreign_key "listings", "brands"
   add_foreign_key "listings", "users"
   add_foreign_key "requests", "listings"
   add_foreign_key "requests", "users"

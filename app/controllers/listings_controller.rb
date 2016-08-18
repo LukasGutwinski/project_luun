@@ -25,7 +25,9 @@ class ListingsController < ApplicationController
 
   def new
     @listing = Listing.new
-    @brands = ["Abarth", "AC", "Acura", "Aixam", "Asia Motors", "Aston Martin", "Audi", "Austin", "Austin Healey", "Bentley", "BMW", "Borgward", "Brilliance", "Bugatti", "Buick", "Cadillac", "Casalini", "Caterham", "Chatenet", "Chevrolet", "Chrysler", "Citroën", "Cobra", "Corvette", "Dacia", "Daewoo", "Daihatsu", "DeTomaso", "Dodge", "Donkervoort", "DS Automobiles", "Ferrari", "Fiat", "Fisker", "Ford", "GAC Gonow", "Gemballa", "GMC", "Grecav", "Hamann", "Holden", "Honda", "Hummer", "Hyundai", "Infiniti", "Isuzu", "Iveco", "Jaguar", "Jeep", "Kia", "Koenigsegg", "KTM", "Lada", "Lamborghini", "Lancia", "Land Rover", "Landwind", "Lexus", "Ligier", "Lincoln", "Lotus", "Mahindra", "Maserati", "Maybach", "Mazda", "McLaren", "Mercedes-Benz", "MG", "Microcar", "MINI", "Mitsubishi", "Morgan", "Nissan", "NSU", "Oldsmobile", "Opel", "Pagani", "Peugeot", "Piaggio", "Plymouth", "Pontiac", "Porsche", "Proton", "Renault", "Rolls-Royce", "Rover", "Ruf", "Saab", "Santana", "Seat", "Skoda", "Smart", "speedART", "Spyker", "Ssangyong", "Subaru", "Suzuki", "Talbot", "Tata", "TECHART", "Tesla", "Toyota", "Trabant", "Triumph", "TVR", "Volkswagen", "Volvo", "Wartburg", "Westfield", "Wiesman"]
+    @brands = Brand.all
+    @brand_hash = create_hash_cars(@brands)
+
     @conditions = ["Brand new", "Used", "Not roadworthy"]
   end
 
@@ -64,6 +66,20 @@ class ListingsController < ApplicationController
 
   def set_listing
     @listing = Listing.find(params[:id])
+  end
+
+    def create_hash_cars(brands)
+    hash = {}
+      brands.each do |brand|
+        brand.brand_models.each do |model|
+        if hash[brand.name]
+          hash[brand.name] << model.name
+        else
+          hash[brand.name] = [model.name]
+        end
+      end
+    end
+    return hash
   end
 end
 
