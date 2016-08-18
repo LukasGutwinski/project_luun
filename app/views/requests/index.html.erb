@@ -1,3 +1,8 @@
+<% if current_user == @listing.user %>
+
+<% if @requests.size == 0 %>
+  <h1>You have no request yet </h1>
+  <% else %>
 <h1>Here are the requests for your car: </h1>
 
 <ul>
@@ -12,3 +17,8 @@
       <% end %>
       <% end %>
     </ul>
+    <% end %>
+
+    <% else %>
+    <h1> You shouldn't be here get out!!</h1>
+<% end %>

@@ -2,7 +2,10 @@ Rails.application.routes.draw do
 	devise_for :users,
 
 	controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }
-	resources :listings
+
+
+
+  resources :listings
 
   resources :listings, :only => [:index, :show] do
     resources :requests do
@@ -23,5 +26,13 @@ Rails.application.routes.draw do
       resources :requests, :only => [:index]
     end
   end
+
+
+  namespace :admin do
+    resources :listings
+    resources :users
+  end
+
+  match 'admin/users/:id' => 'admin/users#destroy', :via => :delete, :as => :admin_destroy_user
 
 end
