@@ -38,7 +38,7 @@ class ListingsController < ApplicationController
 
   def create
     @listing = Listing.new(listing_params)
-
+    @listing.brand = Brand.where(name: params[:listing][:brand][:name]).first
     #doing this for testing purposes until the login module is added
     # @listing.user = User.find(1)
     @listing.user = current_user
