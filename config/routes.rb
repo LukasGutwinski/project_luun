@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
 	controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }
 
-
+  get "json", to: "pages#json", :defaults => { :format => 'json' }
 
   resources :listings
 
@@ -14,25 +14,31 @@ Rails.application.routes.draw do
         put :cancel_approval
       end
     end
-  end
-
-  root to: 'pages#home'
-
-  mount Attachinary::Engine => "/attachinary"
-
-  namespace :user do
-    resources :requests, only: [:index]
-    resources :listings, only: [:index] do
-      resources :requests, :only => [:index]
+    resources :favorites do
+      collection do
+        put :favorite
+        put :unfavorite
+      end
     end
   end
 
+      root to: 'pages#home'
 
-  namespace :admin do
-    resources :listings
-    resources :users
-  end
+      mount Attachinary::Engine => "/attachinary"
 
-  match 'admin/users/:id' => 'admin/users#destroy', :via => :delete, :as => :admin_destroy_user
+      namespace :user do
+        resources :requests, only: [:index]
+        resources :listings, only: [:index] do
+          resources :requests, :only => [:index]
+        end
+      end
 
-end
+
+      namespace :admin do
+        resources :listings
+        resources :users
+      end
+
+      match 'admin/users/:id' => 'admin/users#destroy', :via => :delete, :as => :admin_destroy_user
+
+    end

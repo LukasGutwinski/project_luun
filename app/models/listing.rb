@@ -1,6 +1,7 @@
 class Listing < ApplicationRecord
   belongs_to :user
   has_many :requests
+  has_many :favorites
   has_attachments :photos, maximum: 10
   # validates :photos, presence: true
   validates :brand, :model, :origin, :city, length: { minimum: 1, maximum: 30 }

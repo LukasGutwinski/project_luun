@@ -11,7 +11,7 @@
           <i class="fa fa-motorcycle"></i>
         </button>
       </div>
-      <!-- start -->
+      <!-- real thing -->
       <form action="/listings" name="search-bar">
         <div class="filter-dropdowns">
 
@@ -53,10 +53,34 @@
       </div>
     </div>
   </div>
-    </form>
-    <!-- end -->
+</form>
+<!-- end -->
 
+<!-- start -->
+<form action="/listings" name="search-bar">
+  <div class="filter-dropdowns">
 
+    <select name="brand" class="ui search dropdown">
+      <% @brands.each do |brand| %>
+      <option value = <%= brand %>><%= brand %></option>
+      <% end %>
+    </select>
+
+    <select name="model" class="ui search dropdown">
+      <% @models.each do |model| %>
+      <option value = <%= model %>><%= model %></option>
+      <% end %>
+    </select>
+  </div>
+
+</form>
+
+<%= @hash %>
+
+<!--
+  <option value="">Brand</option>
+-->
+<!-- end -->
 <div class="ui container" id="car-overview">
   <h1 class="section-title">Popular Cars</h1>
 
