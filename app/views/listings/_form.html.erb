@@ -1,27 +1,57 @@
 <div class="ui container">
   <%= simple_form_for(@listing) do |f| %>
-    <% if @listing.errors.any? %>
-      <div id="error_explanation">
-        <ul>
-        <% @listing.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
+  <% if @listing.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+      <% @listing.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <%= f.simple_fields_for :brand do |ff| %>
+    <%= ff.input :name, label: 'Brand', collection: @brand_hash.keys, input_html: {id: "brand"} %>
+  <% end %>
 
-    <%= f.input :brand_id, as: :select, collection: @brands %>
-    <%= f.input :model %>
-    <%= f.input :title %>
-    <%= f.input :mileage %>
-    <%= f.input :description %>
-    <%= f.input :price %>
-    <%= f.input :year %>
-    <%= f.input :condition, as: :select, collection: @conditions %>
-    <%= f.input :origin %>
-    <%= f.input :city %>
-    <%= f.input :photos, as: :attachinary %>
-    <%= f.button :submit %>
+  <%= f.simple_fields_for :brand_model do |ff| %>
+    <%= ff.input :name, label: 'model', collection: ['none'], input_html: {id: "model"}%>
+  <% end %>
+
+  <%= f.input :title %>
+  <%= f.input :mileage %>
+  <%= f.input :description %>
+  <%= f.input :price %>
+  <%= f.input :year %>
+  <%= f.input :condition, as: :select, collection: @conditions %>
+  <%= f.input :origin %>
+  <%= f.input :city %>
+  <%= f.input :photos, as: :attachinary %>
+  <%= f.button :submit %>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $("#brand").change(function() {
+
+      var el = $(this) ;
+      console.log(el.val());
+
+
+      <% @brand_hash.each do |brand, models| %>
+      if(el.val() === '<%= brand %>') {
+        $("#model option").remove();
+        <% models.each do |model| %>
+        $("#model").append(" <option value='<%= model %>'><%= model %></option>");
+        <% end %>
+      }
+      <% end %>
+
+      else if(el.val() === "" ) {
+        $("#model option").remove();
+      }
+    });
+  });
+</script>
 

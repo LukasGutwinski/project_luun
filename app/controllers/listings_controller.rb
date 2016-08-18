@@ -2,20 +2,21 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
 
   def index
-    params[:max_price] == "" ? @max_price = 999999 : @max_price = params[:max_price].to_i
-    params[:min_price] == "" ? @min_price = 0 : @min_price = params[:min_price].to_i
-    if params[:brand] == "" && params[:model] == ""
-      @search_term = "*"
-    else
-      @search_term = "#{params[:brand]} #{params[:model]}"
-    end
-    @listings = Listing.search @search_term, fields: [:brand, :model]
-    @listings = @listings.select{ |listing| @min_price <= listing.price && listing.price <= @max_price }
+    # params[:max_price] == "" ? @max_price = 999999 : @max_price = params[:max_price].to_i
+    # params[:min_price] == "" ? @min_price = 0 : @min_price = params[:min_price].to_i
+    # if params[:brand] == "" && params[:model] == ""
+    #   @search_term = "*"
+    # else
+    #   @search_term = "#{params[:brand]} #{params[:model]}"
+    # end
+    # @listings = Listing.search @search_term, fields: [:brand.name, :model]
+    # @listings = @listings.select{ |listing| @min_price <= listing.price && listing.price <= @max_price }
 
-    session[:query_string] = request.query_parameters.to_query
+    # session[:query_string] = request.query_parameters.to_query
     # @listings = Listing.search "#{params[:brand]} #{params[:model]}", fields: [:brand, :model]
     # @listings = Listing.search "#{params[:brand]} #{params[:model]}", fields: [:brand, :model], query: {query_string: {query: price_range}}
     # @listings = Listing.search "#{params[:brand]} #{params[:model]}", fields: [:brand, :model], where("price < ?", params[:max_price])
+    @listings = @listing.all
   end
 
   def show
@@ -27,7 +28,6 @@ class ListingsController < ApplicationController
     @listing = Listing.new
     @brands = Brand.all
     @brand_hash = create_hash_cars(@brands)
-
     @conditions = ["Brand new", "Used", "Not roadworthy"]
   end
 
@@ -38,10 +38,13 @@ class ListingsController < ApplicationController
 
   def create
     @listing = Listing.new(listing_params)
-
+    @listing.brand = Brand.where(name: params[:listing][:brand][:name]).first
+    @brand_model = BrandModel.where(name: params[:listing][:brand_model][:name])
+    @listing.brand = @brand_model
     #doing this for testing purposes until the login module is added
     # @listing.user = User.find(1)
     @listing.user = current_user
+    raise
     if @listing.save
       redirect_to listing_path(@listing)
     else
