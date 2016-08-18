@@ -28,7 +28,6 @@ class ListingsController < ApplicationController
     @listing = Listing.new
     @brands = Brand.all
     @brand_hash = create_hash_cars(@brands)
-
     @conditions = ["Brand new", "Used", "Not roadworthy"]
   end
 
@@ -40,9 +39,12 @@ class ListingsController < ApplicationController
   def create
     @listing = Listing.new(listing_params)
     @listing.brand = Brand.where(name: params[:listing][:brand][:name]).first
+    @brand_model = BrandModel.where(name: params[:listing][:brand_model][:name])
+    @listing.brand = @brand_model
     #doing this for testing purposes until the login module is added
     # @listing.user = User.find(1)
     @listing.user = current_user
+    raise
     if @listing.save
       redirect_to listing_path(@listing)
     else

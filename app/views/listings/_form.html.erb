@@ -10,9 +10,13 @@
   </div>
   <% end %>
   <%= f.simple_fields_for :brand do |ff| %>
-    <%= ff.input :name, label: 'Brand' %>
+    <%= ff.input :name, label: 'Brand', collection: @brand_hash.keys, input_html: {id: "brand"} %>
   <% end %>
-  <%= f.input :model %>
+
+  <%= f.simple_fields_for :brand_model do |ff| %>
+    <%= ff.input :name, label: 'model', collection: ['none'], input_html: {id: "model"}%>
+  <% end %>
+
   <%= f.input :title %>
   <%= f.input :mileage %>
   <%= f.input :description %>
@@ -25,4 +29,29 @@
   <%= f.button :submit %>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $("#brand").change(function() {
+
+      var el = $(this) ;
+      console.log(el.val());
+
+
+      <% @brand_hash.each do |brand, models| %>
+      if(el.val() === '<%= brand %>') {
+        $("#model option").remove();
+        <% models.each do |model| %>
+        $("#model").append(" <option value='<%= model %>'><%= model %></option>");
+        <% end %>
+      }
+      <% end %>
+
+      else if(el.val() === "" ) {
+        $("#model option").remove();
+      }
+    });
+  });
+</script>
 
