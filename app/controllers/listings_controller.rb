@@ -2,20 +2,21 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
 
   def index
-    params[:max_price] == "" ? @max_price = 999999 : @max_price = params[:max_price].to_i
-    params[:min_price] == "" ? @min_price = 0 : @min_price = params[:min_price].to_i
-    if params[:brand] == "" && params[:model] == ""
-      @search_term = "*"
-    else
-      @search_term = "#{params[:brand]} #{params[:model]}"
-    end
-    @listings = Listing.search @search_term, fields: [:brand, :model]
-    @listings = @listings.select{ |listing| @min_price <= listing.price && listing.price <= @max_price }
+    # params[:max_price] == "" ? @max_price = 999999 : @max_price = params[:max_price].to_i
+    # params[:min_price] == "" ? @min_price = 0 : @min_price = params[:min_price].to_i
+    # if params[:brand] == "" && params[:model] == ""
+    #   @search_term = "*"
+    # else
+    #   @search_term = "#{params[:brand]} #{params[:model]}"
+    # end
+    # @listings = Listing.search @search_term, fields: [:brand.name, :model]
+    # @listings = @listings.select{ |listing| @min_price <= listing.price && listing.price <= @max_price }
 
-    session[:query_string] = request.query_parameters.to_query
+    # session[:query_string] = request.query_parameters.to_query
     # @listings = Listing.search "#{params[:brand]} #{params[:model]}", fields: [:brand, :model]
     # @listings = Listing.search "#{params[:brand]} #{params[:model]}", fields: [:brand, :model], query: {query_string: {query: price_range}}
     # @listings = Listing.search "#{params[:brand]} #{params[:model]}", fields: [:brand, :model], where("price < ?", params[:max_price])
+    @listings = @listing.all
   end
 
   def show
