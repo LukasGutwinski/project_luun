@@ -2,7 +2,9 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   has_many :listings
+  has_many :listings, through: :favorites, as: :best_listings
   has_many :requests
+  has_many :favorites
 
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable,
@@ -26,4 +28,9 @@ class User < ApplicationRecord
 
     return user
   end
+
+  def best_listings
+    self.favorites.map{|fav| Listing.find(fav.listing_id)}
+  end
+
 end

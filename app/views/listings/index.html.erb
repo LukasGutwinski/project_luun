@@ -127,10 +127,21 @@
           <% end %>
         </div>
         <div class="primary-action-button">
-         <button class="ui primary basic button">Contact Seller</button>
-          <button class="ui icon button">
-            <i class="heart icon"></i>
-          </button>
+         <button class="ui primary basic button anim-trigger">Contact Seller</button>
+          <% if Favorite.where(user_id: current_user, listing_id: listing).first %>
+            <% favorite = Favorite.where(user_id: current_user, listing_id: listing).first %>
+            <%= link_to listing_favorite_path(listing, favorite), method: :delete do%>
+                <button class="ui icon button">
+                  <i class="red heart icon"></i>
+                </button>
+              <%end%>
+          <% else %>
+            <%= link_to listing_favorites_path(listing), method: :post do %>
+                <button class="ui icon button">
+                  <i class="heart icon heart-anim-trigger"></i>
+                </button>
+              <%end%>
+          <% end %>
         </div>
       </div>
     </div>
@@ -146,3 +157,63 @@
 ;
 </script>
 
+<script type="text/javascript">
+  $(".heart-anim-trigger").click(function(){
+  $(".listings-entries").append('<div class="heart-anim"></div>')
+  $(".heart-anim").append('<div class="heart-wrapper active"><div class="heart"><div class="tl"></div><div class="tr"></div><div class="bl"></div><div class="br"></div></div><div class="ring"></div><div class="circles"></div></div>').delay(2000).fadeOut();
+  setTimeout(function() {
+  $('.heart-anim').remove();
+}, 2500);;
+  var h = document.querySelector('.heart-wrapper');
+
+  function toggleActivate(){
+    h.classList.toggle('active');
+  }
+
+  if(!debug){
+    h.addEventListener('click',function(){
+      toggleActivate();
+    },false);
+
+    // setInterval(toggleActivate,1000);
+  }else{
+    var elts = Array.prototype.slice.call(h.querySelectorAll(':scope > *'),0);
+    var activated = false;
+    var animating = false;
+    var count = 0;
+    var step = 1000;
+
+    function setAnim(state){
+      elts.forEach(function(elt){
+        elt.style.animationPlayState = state;
+      });
+    }
+
+    h.addEventListener('click',function(){
+      if (animating) return;
+      if (count > 27) {
+        h.classList.remove('active');
+        count = 0;
+        return;
+      }
+      if (!activated) h.classList.add('active') && (activated = true);
+
+      console.log('Step : '+(++count));
+      animating = true;
+
+      setAnim('running');
+      setTimeout(function(){
+        setAnim('paused');
+        animating = false;
+      },step);
+    },false);
+
+    setAnim('paused');
+    elts.forEach(function(elt){
+      elt.style.animationDuration = step/1000*27+'s';
+    });
+  }
+
+});
+
+</script>

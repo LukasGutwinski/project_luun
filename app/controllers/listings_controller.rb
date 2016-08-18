@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
-
+  before_action :find_favorite, only: [:index]
   def index
     params[:max_price] == "" ? @max_price = 999999 : @max_price = params[:max_price].to_i
     params[:min_price] == "" ? @min_price = 0 : @min_price = params[:min_price].to_i
@@ -56,7 +56,15 @@ class ListingsController < ApplicationController
     redirect_to listings_path
   end
 
+  def favorites
+    @listings = current_user.best_listings
+  end
+
   private
+
+  def find_favorite
+    @favorite = Favorite.where("user_id" == current_user.id, "listing_id" == params[:listing_id])
+  end
 
   def listing_params
     params.require(:listing).permit(:brand, :model, :title, :mileage, :description, :price, :year, :condition, :origin, :city, photos: [])
