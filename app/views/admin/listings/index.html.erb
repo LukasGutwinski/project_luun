@@ -1,0 +1,10 @@
+<ul>
+  <% @listings.each do |listing| %>
+    <li>
+      <p>user: <%= listing.user.email %> </p>
+      <p>brand: <%= listing.brand %> </p>
+      <p>user: <%= listing.model %> </p>
+      <p>user: <%= listing.title %> </p>
+      <%= link_to 'delete this listing', listing_path(listing), method: :delete %>
+  <% end %>
+</ul>
