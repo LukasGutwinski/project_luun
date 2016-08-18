@@ -9,7 +9,8 @@
         </ul>
       </div>
     <% end %>
-    <%= f.input :brand, as: :select, collection: @brands %>
+
+    <%= f.input :brand_id, as: :select, collection: @brands %>
     <%= f.input :model %>
     <%= f.input :title %>
     <%= f.input :mileage %>
@@ -23,3 +24,4 @@
     <%= f.button :submit %>
   <% end %>
 </div>
+
