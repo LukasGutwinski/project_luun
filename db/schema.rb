@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160818150400) do
+ActiveRecord::Schema.define(version: 20160818142529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,8 +30,6 @@ ActiveRecord::Schema.define(version: 20160818150400) do
     t.index ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent", using: :btree
   end
 
-<<<<<<< HEAD
-=======
   create_table "brand_models", force: :cascade do |t|
     t.string   "name"
     t.integer  "brand_id"
@@ -46,7 +44,6 @@ ActiveRecord::Schema.define(version: 20160818150400) do
     t.datetime "updated_at", null: false
   end
 
->>>>>>> c6a541ee46e88046f470fd1bf30f84ef10edc66d
   create_table "favorites", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "listing_id"
@@ -115,16 +112,11 @@ ActiveRecord::Schema.define(version: 20160818150400) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-<<<<<<< HEAD
-  add_foreign_key "favorites", "listings"
-  add_foreign_key "favorites", "users"
-=======
   add_foreign_key "brand_models", "brands"
   add_foreign_key "favorites", "listings"
   add_foreign_key "favorites", "users"
   add_foreign_key "listings", "brand_models"
   add_foreign_key "listings", "brands"
->>>>>>> c6a541ee46e88046f470fd1bf30f84ef10edc66d
   add_foreign_key "listings", "users"
   add_foreign_key "requests", "listings"
   add_foreign_key "requests", "users"
