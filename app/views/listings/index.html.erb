@@ -32,62 +32,61 @@
           <option value="100000">100000</option>
         </select>
       </div>
-    <div class="ui primary big animated button" tabindex="0" style="margin-top:40px;" onClick="document.forms['search-bar'].submit();">
-      <div class="hidden content"><i class="fa fa-car" aria-hidden="true"></i></div>
-      <div class="visible content">
-        Search again!
+      <div class="ui primary big animated button" tabindex="0" style="margin-top:40px;" onClick="document.forms['search-bar'].submit();">
+        <div class="hidden content"><i class="fa fa-car" aria-hidden="true"></i></div>
+        <div class="visible content">
+          Search again!
+        </div>
       </div>
-    </div>
-</form>
-</div>
+    </form>
+  </div>
 </div>
 
 <div class="light-grey-bg listings-entries">
   <% @listings.each do |listing| %>
-    <div class="listing-card">
-      <%= cl_image_tag(listing.photos.first.path, width: 300, height: 200, crop:"fill", class: "listing-picture") %>
-      <div class="listing-details">
-        <h2><%= link_to listing.title, listing_path(listing) %></h2>
-        <h3><%= listing.price %> €</h3>
-        <i class="fa fa-map-marker" aria-hidden="true"></i> <%= listing.city %> <i class="fa fa-tachometer" aria-hidden="true"></i> <%= listing.mileage %> <i class="fa fa-calendar" aria-hidden="true"></i> <%= listing.year %>
-        <p>
-          <%= truncate(listing.description, :length => 500) %>
-        </p>
+  <div class="listing-card">
+    <%= cl_image_tag(listing.photos.first.path, width: 300, height: 200, crop:"fill", class: "listing-picture") %>
+    <div class="listing-details">
+      <h2><%= link_to listing.title, listing_path(listing) %></h2>
+      <h3><%= listing.price %> €</h3>
+      <i class="fa fa-map-marker" aria-hidden="true"></i> <%= listing.city %> <i class="fa fa-tachometer" aria-hidden="true"></i> <%= listing.mileage %> <i class="fa fa-calendar" aria-hidden="true"></i> <%= listing.year %>
+      <p>
+        <%= truncate(listing.description, :length => 500) %>
+      </p>
+    </div>
+    <div class="listing-actions">
+      <div class="edit-actions">
+        <% if current_user == listing.user %>
+        <%= link_to edit_listing_path(listing), class: "ui icon button" do %>
+        <i class="delete icon"></i>
+        <% end %>
+        <%= link_to listing_path(listing), method: :delete, data: { confirm: "Are you sure?" }, class: "ui icon delete-icon button" do %>
+        <i class="edit icon"></i>
+        <% end %>
+        <% end %>
       </div>
-      <div class="listing-actions">
-        <div class="edit-actions">
-          <% if current_user == listing.user %>
-            <%= link_to edit_listing_path(listing), class: "ui icon button" do %>
-              <i class="delete icon"></i>
-            <% end %>
-            <%= link_to listing_path(listing), method: :delete, data: { confirm: "Are you sure?" }, class: "ui icon delete-icon button" do %>
-              <i class="edit icon"></i>
-            <% end %>
-          <% end %>
-        </div>
-        <div class="primary-action-button">
-         <button class="ui primary basic button anim-trigger">Contact Seller</button>
-          <% if is_favorite?(listing) %>
-            <% favorite = Favorite.where(user_id: current_user, listing_id: listing).first %>
-            <%= link_to listing_favorite_path(listing, favorite), method: :delete, remote: true do %>
-                <button class="ui icon button" id="listing-<%= listing.id %>">
-                  <i class="red heart icon"></i>
-                </button>
-              <%end%>
-          <% else %>
-            <%= link_to listing_favorites_path(listing), method: :post, remote: true do %>
-              <button class="ui icon button" id="listing-<%= listing.id %>">
-                <i class="heart icon heart-anim-trigger"></i>
-              </button>
-            <%end%>
-            <%= link_to listing_path(listing), method: :delete, remote: true do %>
-              <button class="ui icon button" id="listing-<%= listing.id %>-hidden" style="display:none;">
-                <i class="red heart icon"></i>
-              </button>
-            <%end%>
-          <% end %>
-        </div>
-      </div>
+      <div class="primary-action-button">
+       <button class="ui primary basic button anim-trigger">Contact Seller</button>
+       <% if is_favorite?(listing) %>
+       <% favorite = Favorite.where(user_id: current_user, listing_id: listing).first %>
+       <%= link_to listing_favorite_path(listing, favorite), method: :delete, remote: true do %>
+       <button class="ui icon button" id="listing-<%= listing.id %>">
+        <i class="red heart icon"></i>
+      </button>
+      <%end%>
+      <% else %>
+      <%= link_to listing_favorites_path(listing), method: :post, remote: true do %>
+      <button class="ui icon button" id="listing-<%= listing.id %>">
+        <i class="heart icon heart-anim-trigger"></i>
+      </button>
+      <%end%>
+      <%= link_to listing_path(listing), method: :delete, remote: true do %>
+      <button class="ui icon button" id="listing-<%= listing.id %>-hidden" style="display:none;">
+        <i class="red heart icon"></i>
+      </button>
+      <%end%>
+      <% end %>
+    </div>
   </div>
 </div>
 <% end %>
@@ -193,3 +192,4 @@
     });
   });
 </script>
+
