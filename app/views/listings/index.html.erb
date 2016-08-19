@@ -120,19 +120,24 @@
         </div>
         <div class="primary-action-button">
          <button class="ui primary basic button anim-trigger">Contact Seller</button>
-          <% if Favorite.where(user_id: current_user, listing_id: listing).first %>
+          <% if is_favorite?(listing) %>
             <% favorite = Favorite.where(user_id: current_user, listing_id: listing).first %>
-            <%= link_to listing_favorite_path(listing, favorite), method: :delete do%>
-                <button class="ui icon button">
+            <%= link_to listing_favorite_path(listing, favorite), method: :delete, remote: true do %>
+                <button class="ui icon button" id="listing-<%= listing.id %>">
                   <i class="red heart icon"></i>
                 </button>
               <%end%>
           <% else %>
-            <%= link_to listing_favorites_path(listing), method: :post do %>
-                <button class="ui icon button">
-                  <i class="heart icon heart-anim-trigger"></i>
-                </button>
-              <%end%>
+            <%= link_to listing_favorites_path(listing), method: :post, remote: true do %>
+              <button class="ui icon button" id="listing-<%= listing.id %>">
+                <i class="heart icon heart-anim-trigger"></i>
+              </button>
+            <%end%>
+            <%= link_to listing_path(listing), method: :delete, remote: true do %>
+              <button class="ui icon button" id="listing-<%= listing.id %>-hidden" style="display:none;">
+                <i class="red heart icon"></i>
+              </button>
+            <%end%>
           <% end %>
         </div>
       </div>
