@@ -61,7 +61,7 @@
   </div>
 </div>
 <div id="request">
-  <%= simple_form_for [@listing,@request] do |f| %>
+  <%= simple_form_for [@listing,@request], remote: true do |f| %>
   <%= f.input :comment %>
   <%= f.button :submit, data: { confirm: "Are you sure?"} %>
   <% end %>

@@ -4,14 +4,22 @@ class ListingsController < ApplicationController
   def index
     params[:max_price] == "" ? @max_price = 999999 : @max_price = params[:max_price].to_i
     params[:min_price] == "" ? @min_price = 0 : @min_price = params[:min_price].to_i
-    if params[:brand] == "" && params[:model] == ""
-      @search_term = "*"
+    if params[:brand] == ""
+      @search_term_brand = "*"
     else
-      @search_term = "#{params[:brand]} #{params[:model]}"
+      @search_term_brand = "#{params[:brand]}"
     end
-    @listings = Listing.search @search_term#, fields: [:search_brand, :search_model]
-    @listings = @listings.select{ |listing| @min_price <= listing.price && listing.price <= @max_price }
 
+    if params[:model] == ""
+      @search_term_model = "*"
+    else
+      @search_term_model = "#{params[:model]}"
+    end
+
+    @listings_brand = Listing.search @search_term_brand, fields: [{search_brand: :exact}]
+    @listings_model = Listing.search @search_term_model, fields: [{search_model: :exact}]
+    @listings = @listings_brand.to_a & @listings_model.to_a
+    @listings = @listings.select{ |listing| @min_price <= listing.price && listing.price <= @max_price }
     session[:query_string] = request.query_parameters.to_query
     # @listings = Listing.search "#{params[:brand]} #{params[:model]}", fields: [:brand, :model]
     # @listings = Listing.search "#{params[:brand]} #{params[:model]}", fields: [:brand, :model], query: {query_string: {query: price_range}}
@@ -80,10 +88,10 @@ class ListingsController < ApplicationController
     @listing = Listing.find(params[:id])
   end
 
-    def create_hash_cars(brands)
+  def create_hash_cars(brands)
     hash = {}
-      brands.each do |brand|
-        brand.brand_models.each do |model|
+    brands.each do |brand|
+      brand.brand_models.each do |model|
         if hash[brand.name]
           hash[brand.name] << model.name
         else
