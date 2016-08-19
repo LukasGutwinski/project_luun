@@ -24,12 +24,19 @@ class ListingsController < ApplicationController
     # @listings = Listing.search "#{params[:brand]} #{params[:model]}", fields: [:brand, :model]
     # @listings = Listing.search "#{params[:brand]} #{params[:model]}", fields: [:brand, :model], query: {query_string: {query: price_range}}
     # @listings = Listing.search "#{params[:brand]} #{params[:model]}", fields: [:brand, :model], where("price < ?", params[:max_price])
-
+    @brands = Brand.all
+    @car_hash = create_hash_cars(@brands)
   end
 
   def show
-    @request = Request.new
     @query_string = session[:query_string]
+    @requested = false
+    current_user.requests.each do |request|
+      @requested = true if request.listing == @listing
+    end
+    if @requested == false
+      @request = Request.new
+    end
   end
 
   def new

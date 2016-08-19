@@ -1,13 +1,20 @@
+<div class='ui container'>
 <% if @requests.size == 0 %>
-<h1>You haven't requested any vehicles yet</h1>
+<div style='margin-top: 220px' class='ui massive message red'>
+
+  <div class="header">
+  You haven't requested vehicles yet!
+  </div>
+  <p>Please browse the car listings and request the cars you would like to purchase</p>
+</div>
 <% else %>
 <h1>Here are your requests</h1>
 
 <ul>
   <% @requests.each do |request| %>
   <li>
-    <p><%= "Brand: #{request.listing.brand}" %></p>
-    <p><%= "Model: #{request.listing.model}" %></p>
+    <p><%= "Brand: #{request.listing.brand.name}" %></p>
+    <p><%= "Model: #{request.listing.brand_model.name}" %></p>
     <p><%= "Status: #{request.status}" %></p>
     <% if request.status == "Approved" %>
     <p>Congratulations your request has been approved. Please contact the seller via <%= mail_to request.listing.user.email %></p>
@@ -16,3 +23,4 @@
   <% end %>
 </ul>
 <% end %>
+</div>

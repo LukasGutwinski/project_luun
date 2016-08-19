@@ -3,96 +3,43 @@
     <i class="fa fa-sliders" aria-hidden="true"></i> Filters
   </div>
   <div class="ui vertical accordion">
-    <div class="item">
-      <div class="content">
-      <div class="filter-section">
-          <div class="ui checkbox">
-            <input type="checkbox" name="example">
-            <label>Mercedes (10)</label>
-          </div>
-          <div class="ui checkbox">
-            <input type="checkbox" name="example">
-            <label>Porsche (11)</label>
-          </div>
-          <div class="ui checkbox">
-            <input type="checkbox" name="example">
-            <label>Toyota (8)</label>
-          </div>
-          <div class="ui checkbox">
-            <input type="checkbox" name="example">
-            <label>Tesla (1)</label>
-          </div>
-          <div class="ui checkbox">
-            <input type="checkbox" name="example">
-            <label>Peugeot (2)</label>
-          </div>
-        </div>
+    <form action="/listings" name="search-bar">
+      <div class="filter-dropdowns">
+
+        <select name="brand" class="ui search dropdown" id="brand">
+          <option value="">Brand</option>
+          <% @car_hash.each do |brand, models| %>
+          <option value="<%= brand %>"><%= brand %></option>
+          <% end %>
+        </select>
+
+        <select name="model" class="ui search dropdown" id="model">
+          <option value="">Model</option>
+        </select>
+
+        <select name="min_price" class="ui search dropdown">
+          <option value="">Min price</option>
+          <option value="0">0</option>
+          <option value="5000">10000</option>
+          <option value="50000">50000</option>
+          <option value="100000">100000</option>
+        </select>
+        <select name="max_price" class="ui search dropdown">
+          <option value="">Max price</option>
+          <option value="5000">5000</option>
+          <option value="10000">10000</option>
+          <option value="50000">50000</option>
+          <option value="100000">100000</option>
+        </select>
+      </div>
+    <div class="ui primary big animated button" tabindex="0" style="margin-top:40px;" onClick="document.forms['search-bar'].submit();">
+      <div class="hidden content"><i class="fa fa-car" aria-hidden="true"></i></div>
+      <div class="visible content">
+        Search again!
       </div>
     </div>
-    <div class="item">
-      <a class="title">
-        <i class="dropdown icon"></i>
-        Models
-      </a>
-      <div class="content">
-        <div class="filter-section">
-          <div class="ui checkbox">
-            <input type="checkbox" name="example">
-            <label>Prius</label>
-          </div>
-          <div class="ui checkbox">
-            <input type="checkbox" name="example">
-            <label>Polo</label>
-          </div>
-          <div class="ui checkbox">
-            <input type="checkbox" name="example">
-            <label>Model 3</label>
-          </div>
-          <div class="ui checkbox">
-            <input type="checkbox" name="example">
-            <label>Model S</label>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <a class="title">
-        <i class="dropdown icon"></i>
-        Price
-      </a>
-      <div class="content">
-        <div class="filter-section">
-          FROM ... TO
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <a class="title">
-        <i class="dropdown icon"></i>
-        Location
-      </a>
-      <div class="content">
-        <div class="filter-section">
-          <div class="ui checkbox">
-            <input type="checkbox" name="example">
-            <label>Vienna</label>
-          </div>
-          <div class="ui checkbox">
-            <input type="checkbox" name="example">
-            <label>Brussels</label>
-          </div>
-          <div class="ui checkbox">
-            <input type="checkbox" name="example">
-            <label>London</label>
-          </div>
-          <div class="ui checkbox">
-            <input type="checkbox" name="example">
-            <label>Bangkok</label>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+</form>
+</div>
 </div>
 
 <div class="light-grey-bg listings-entries">
@@ -141,36 +88,37 @@
           <% end %>
         </div>
       </div>
-    </div>
-  <% end %>
+  </div>
+</div>
+<% end %>
 
-  <%= link_to "Add new listing", new_listing_path %>
+<%= link_to "Add new listing", new_listing_path %>
 </div>
 
 <script type="text/javascript">
   $('.ui.accordion').accordion({
     exclusive: false
   })
-;
+  ;
 </script>
 
 <script type="text/javascript">
   $(".heart-anim-trigger").click(function(){
-  $(".listings-entries").append('<div class="heart-anim"></div>')
-  $(".heart-anim").append('<div class="heart-wrapper active"><div class="heart"><div class="tl"></div><div class="tr"></div><div class="bl"></div><div class="br"></div></div><div class="ring"></div><div class="circles"></div></div>').delay(2000).fadeOut();
-  setTimeout(function() {
-  $('.heart-anim').remove();
-}, 2500);;
-  var h = document.querySelector('.heart-wrapper');
+    $(".listings-entries").append('<div class="heart-anim"></div>')
+    $(".heart-anim").append('<div class="heart-wrapper active"><div class="heart"><div class="tl"></div><div class="tr"></div><div class="bl"></div><div class="br"></div></div><div class="ring"></div><div class="circles"></div></div>').delay(2000).fadeOut();
+    setTimeout(function() {
+      $('.heart-anim').remove();
+    }, 2500);;
+    var h = document.querySelector('.heart-wrapper');
 
-  function toggleActivate(){
-    h.classList.toggle('active');
-  }
+    function toggleActivate(){
+      h.classList.toggle('active');
+    }
 
-  if(!debug){
-    h.addEventListener('click',function(){
-      toggleActivate();
-    },false);
+    if(!debug){
+      h.addEventListener('click',function(){
+        toggleActivate();
+      },false);
 
     // setInterval(toggleActivate,1000);
   }else{
@@ -213,4 +161,35 @@
 
 });
 
+</script>
+
+
+<script>
+  $('.ui.dropdown').dropdown();
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $("#brand").change(function() {
+
+      var el = $(this) ;
+      // console.log(el);
+
+
+      <% @car_hash.each do |brand, models| %>
+      if(el.val() === '<%= brand %>') {
+        $("#model option").remove();
+        <% models.each do |model| %>
+        $("#model").append(" <option value='<%= model %>'><%= model %></option>");
+        <% end %>
+      }
+      <% end %>
+
+      else if(el.val() === "" ) {
+        $("#model option").remove();
+      }
+    });
+  });
 </script>

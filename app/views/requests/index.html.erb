@@ -1,3 +1,5 @@
+<div class="ui container">
+
 <% if current_user == @listing.user %>
 
 <% if @requests.size == 0 %>
@@ -7,13 +9,18 @@
 
 <ul>
   <% @requests.each do |request| %>
+  <h2>
+      Brand: <%= request.listing.brand.name %>, Model:<%= request.listing.brand_model.name %>
+    </h2>
   <p><%= "You have received a request from #{request.user.first_name} #{request.user.last_name}." %> </p>
   <p><%= "His comment: #{request.comment}" %> <p>
     <p><%= "Status: #{request.status}" %> <p>
       <% if request.status == "Waiting for approval" %>
-      <%= link_to "Approve the listing", approve_listing_request_path(@listing, request), method: :put, data: { confirm: "Are you sure?" }, class:'ui green button' %>
+      <div id="approval-button">
+      <%= link_to "Approve the listing", approve_listing_request_path(@listing, request), method: :put, class:'ui green button' %>
+      </div>
       <% else %>
-      <%= link_to "Cancel the approval", cancel_approval_listing_request_path(@listing, request), method: :put, data: { confirm: "Are you sure?"}, class:'ui red button' %>
+      <%= link_to "Cancel the approval", cancel_approval_listing_request_path(@listing, request), method: :put, class:'ui red button' %>
       <% end %>
       <% end %>
     </ul>
@@ -22,3 +29,4 @@
     <% else %>
     <h1> You shouldn't be here get out!!</h1>
 <% end %>
+</div>
