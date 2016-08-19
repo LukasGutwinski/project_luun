@@ -24,7 +24,10 @@ class ListingsController < ApplicationController
     # @listings = Listing.search "#{params[:brand]} #{params[:model]}", fields: [:brand, :model]
     # @listings = Listing.search "#{params[:brand]} #{params[:model]}", fields: [:brand, :model], query: {query_string: {query: price_range}}
     # @listings = Listing.search "#{params[:brand]} #{params[:model]}", fields: [:brand, :model], where("price < ?", params[:max_price])
-
+    @brands = Brand.all
+    @brand_array = create_array(@brands)
+    @models = BrandModel.all
+    @model_array = create_array(@models)
   end
 
   def show
@@ -88,18 +91,15 @@ class ListingsController < ApplicationController
     @listing = Listing.find(params[:id])
   end
 
-  def create_hash_cars(brands)
-    hash = {}
-    brands.each do |brand|
-      brand.brand_models.each do |model|
-        if hash[brand.name]
-          hash[brand.name] << model.name
-        else
-          hash[brand.name] = [model.name]
-        end
-      end
+  def create_array(elements)
+    array = []
+    elements.each do |element|
+      array << element.name
     end
-    return hash
+    return array
   end
 end
+
+
+
 
