@@ -11,5 +11,5 @@ class Listing < ApplicationRecord
   validates :condition, inclusion: { in: ["Used", "New", "Not roadworthy"], allow_nil: false }
   validates :description, length: { maximum: 500 }
   validates :mileage, :price, :year, numericality: { only_integer: true }
-  # searchkick
+  searchkick
 end
