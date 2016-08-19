@@ -13,8 +13,8 @@ class RequestsController < ApplicationController
     @request.listing = Listing.find(params[:listing_id])
     @request.save
     respond_to do |format|
-      format.html { redirect_to listing_path(@restaurant) }
-        format.js  # <-- will render `app/views/reviews/create.js.erb`
+      format.html { redirect_to listing_path(@request.listing) }
+      format.js  # <-- will render `app/views/reviews/create.js.erb`
       end
     end
 
@@ -34,6 +34,12 @@ class RequestsController < ApplicationController
       redirect_to listing_requests_path(@listing)
     end
 
+
+    private
+
+    def request_params
+      params.require(:request).permit(:comment)
+    end
 
     private
 

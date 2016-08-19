@@ -3,6 +3,7 @@ class PagesController < ApplicationController
     Brand.all
     @brands = Brand.all
     @car_hash = create_hash_cars(@brands)
+    @last_listings = Listing.order("created_at DESC").limit(6)
   end
 
   def create_hash_cars(brands)

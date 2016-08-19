@@ -1,11 +1,13 @@
-<div class="card card--big z-1">
-  <div style="background-image: url(https://placeimg.com/640/480/nature)" class="card__image"></div>
-  <h2 class="card__title">Kangaroo Valley Safari</h2>
-  <h3 class="price">1000 €</h3>
-  <div class="card__text">
-    <div class="year"><i class="fa fa-calendar" aria-hidden="true"></i>
- 1999</div>
-    <div class="mileage"><i class="fa fa-tachometer" aria-hidden="true"></i> 100.000 km</div>
-    <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> Vienna</div>
+<%= link_to listing_path(listing) do %>
+  <div class="card card--big z-1">
+    <div style="background-image:linear-gradient(-225deg, rgba(30,30,30,0.3) 30%, rgba(46,46,46,0.2) 80%), url(<%= listing.photos.first.fullpath %>)" class="card__image"></div>
+    <h2 class="card__title"><%= listing.title %></h2>
+    <h3 class="price"><%= listing.price %> €</h3>
+    <div class="card__text">
+      <div class="year"><i class="fa fa-calendar" aria-hidden="true"></i>
+      <%= listing.year %></div>
+      <div class="mileage"><i class="fa fa-tachometer" aria-hidden="true"></i> <%= listing.mileage %> km</div>
+      <div class="location"><i class="fa fa-map-marker" aria-hidden="true"></i> <%= listing.city %></div>
+    </div>
   </div>
-</div>
+<% end %>

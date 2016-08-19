@@ -58,49 +58,15 @@
   <h1 class="section-title">Popular Cars</h1>
 
   <div class="ui three column grid">
-    <div class="column">
-      <%= render 'layouts/card' %>
-    </div>
-    <div class="column">
-      <%= render 'layouts/card' %>
-    </div>
-    <div class="column">
-      <%= render 'layouts/card' %>
-    </div>
-    <div class="column">
-      <%= render 'layouts/card' %>
-    </div>
-    <div class="column">
-      <%= render 'layouts/card' %>
-    </div>
-    <div class="column">
-      <%= render 'layouts/card' %>
-    </div>
+    <% @last_listings.each do |listing| %>
+      <div class="column">
+        <%= render 'layouts/card', listing: listing %>
+      </div>
+    <% end %>
   </div>
 
 </div>
 <div class="ui container" id="featured-dealers">
-  <h1 class="section-title">Featured Dealers</h1>
-  <div class="ui six column grid">
-    <div class="column">
-      <img src="https://s-media-cache-ak0.pinimg.com/originals/83/90/0a/83900a5b6d403ddbfd4e843ea70828f4.jpg" class="dealer-logo">
-    </div>
-    <div class="column">
-      <img src="https://s-media-cache-ak0.pinimg.com/originals/83/90/0a/83900a5b6d403ddbfd4e843ea70828f4.jpg" class="dealer-logo">
-    </div>
-    <div class="column">
-      <img src="https://s-media-cache-ak0.pinimg.com/originals/83/90/0a/83900a5b6d403ddbfd4e843ea70828f4.jpg" class="dealer-logo">
-    </div>
-    <div class="column">
-      <img src="https://s-media-cache-ak0.pinimg.com/originals/83/90/0a/83900a5b6d403ddbfd4e843ea70828f4.jpg" class="dealer-logo">
-    </div>
-    <div class="column">
-      <img src="https://s-media-cache-ak0.pinimg.com/originals/83/90/0a/83900a5b6d403ddbfd4e843ea70828f4.jpg" class="dealer-logo">
-    </div>
-    <div class="column">
-      <img src="https://s-media-cache-ak0.pinimg.com/originals/83/90/0a/83900a5b6d403ddbfd4e843ea70828f4.jpg" class="dealer-logo">
-    </div>
-  </div>
 </div>
 
 <script>
