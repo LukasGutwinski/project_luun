@@ -15,20 +15,17 @@
       <form action="/listings" name="search-bar">
         <div class="filter-dropdowns">
 
-          <select name="brand" class="ui search dropdown">
+          <select name="brand" class="ui search dropdown" id="brand">
             <option value="">Brand</option>
-            <option value="bmw">BMW</option>
-            <option value="audi">Audi</option>
-            <option value="vw">Volkswagen</option>
+            <% @car_hash.each do |brand, models| %>
+              <option value="<%= brand %>"><%= brand %></option>
+            <% end %>
           </select>
-          <select name="model" class="ui search dropdown">
+
+          <select name="model" class="ui search dropdown" id="model">
             <option value="">Model</option>
-            <option value="Series 3">Series 3</option>
-            <option value="C">C class</option>
-            <option value="AZ">Arizona</option>
-            <option value="WI">Wisconsin</option>
-            <option value="WY">Wyoming</option>
           </select>
+
           <select name="min_price" class="ui search dropdown">
             <option value="">Min price</option>
             <option value="0">0</option>
@@ -53,8 +50,8 @@
       </div>
     </div>
   </div>
-    </form>
-    <!-- end -->
+</form>
+<!-- end -->
 
 
 <div class="ui container" id="car-overview">
@@ -118,4 +115,30 @@
   $('#from-dropdown').dropdown();
   $('#to-dropdown').dropdown();
   $('#location-dropdown').dropdown();
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $("#brand").change(function() {
+
+      var el = $(this) ;
+      // console.log(el);
+
+
+      <% @car_hash.each do |brand, models| %>
+      if(el.val() === '<%= brand %>') {
+        $("#model option").remove();
+        <% models.each do |model| %>
+        $("#model").append(" <option value='<%= model %>'><%= model %></option>");
+        <% end %>
+      }
+      <% end %>
+
+      else if(el.val() === "" ) {
+        $("#model option").remove();
+      }
+    });
+  });
 </script>
