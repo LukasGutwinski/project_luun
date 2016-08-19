@@ -4,10 +4,11 @@ Rails.application.routes.draw do
 	controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }
 
 
-
-  resources :listings
-
-  resources :listings, :only => [:index, :show] do
+  resources :listings do
+    collection do
+      get :favorites
+    end
+    resources :favorites, only: [:create, :destroy]
     resources :requests do
       member do
         put :approve
