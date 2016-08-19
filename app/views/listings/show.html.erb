@@ -53,17 +53,23 @@
         </tbody>
       </table>
 
-  <div style="margin-bottom:80px">
+  <div style="margin-bottom:30px">
     <%= link_to "Delete", listing_path(@listing),
     method: :delete,
     data: { confirm: "Are you sure?" }, class: "ui low-opacity button" %>
     <%= link_to "Edit", edit_listing_path(@listing), class: "ui low-opacity button" %>
   </div>
+
+  <% if @requested %>
+    <div style = "margin-bottom:30px" class = "ui message olive">  You have already requested this car! </div>
+  <% else %>
+  <div style = "margin-bottom:30px" id="request">
+    <%= simple_form_for([ @listing, @request ], remote: true) do |f| %>
+    <%= f.input :comment %>
+    <%= f.button :submit %>
+    <% end %>
+  </div>
+    <% end %>
 </div>
-<div id="request">
-  <%= simple_form_for [@listing,@request], remote: true do |f| %>
-  <%= f.input :comment %>
-  <%= f.button :submit, data: { confirm: "Are you sure?"} %>
-  <% end %>
-</div>
+
 </div>

@@ -28,8 +28,14 @@ class ListingsController < ApplicationController
   end
 
   def show
-    @request = Request.new
     @query_string = session[:query_string]
+    @requested = false
+    current_user.requests.each do |request|
+      @requested = true if request.listing == @listing
+    end
+    if @requested == false
+      @request = Request.new
+    end
   end
 
   def new

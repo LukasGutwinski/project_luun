@@ -4,8 +4,7 @@
   <% @listings.each do |listing| %>
   <li>
     <h2>
-      <%= listing.brand %>
-      <%= listing.model %>
+      Brand: <%= listing.brand.name %>, Model:<%= listing.brand_model.name %>
     </h2>
     <p>Number of requests for this car: <strong><%= listing.requests.count %></strong>  </p>
     <%= link_to 'details', listing_path(listing), class: 'ui yellow button' %>
