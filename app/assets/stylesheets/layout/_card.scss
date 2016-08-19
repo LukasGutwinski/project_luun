@@ -86,7 +86,7 @@
       display: block;
       left: 0;
       right: 0;
-      top: 100px;
+      top: 236px;;
       padding: 16px;
       margin: 0;
       line-height: 1.6;
@@ -129,7 +129,7 @@
 
       // Big modifier
       .card--big {
-      height: 270px;
+      height: 330px;;
       min-height: 270px;
 
           // image element
@@ -139,16 +139,16 @@
           right: 0;
           top: 0;
           opacity: 1;
-          max-height: 176px; }
+          max-height: 240px; }
 
           // title element
           .card__title {
-          top: 110px; }
+          top: 170px; }
 
 
           // text element
           .card__text {
-          top: 176px; }
+          top: 236px;; }
 
 
           .card__action-bar {
@@ -231,7 +231,7 @@
 
       .card .price {
         position: absolute;
-        top: 121px;
+        top: 170px;;
         color: #FFF;
         padding: 0 16px
       }
