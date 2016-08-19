@@ -1,0 +1,4 @@
+$("#listing-<%= j @favorite.listing.id.to_s %>").html("<i class='red heart icon'></i>");
+$("#listing-<%= j @favorite.listing.id.to_s %>").hide();
+$("#listing-<%= j @favorite.listing.id.to_s %>-hidden").show();
+$("#listing-<%= j @favorite.listing.id.to_s %>-hidden").parent().attr("href", '/listings/<%= j @favorite.listing.id.to_s %>/favorites/<%= j (@favorite.id).to_s %>');
