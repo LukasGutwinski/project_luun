@@ -85,7 +85,9 @@ class ListingsController < ApplicationController
   private
 
   def find_favorite
-    @favorite = Favorite.where("user_id" == current_user.id, "listing_id" == params[:listing_id])
+    unless current_user.nil?
+      @favorite = Favorite.where("user_id" == current_user.id, "listing_id" == params[:listing_id])
+    end
   end
 
   def listing_params

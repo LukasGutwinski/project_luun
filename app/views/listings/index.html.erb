@@ -7,25 +7,26 @@
       <div class="filter-dropdowns">
 
         <select name="brand" class="ui search dropdown" id="brand">
-          <option value="">Brand</option>
+          <option value=""><%= params["brand"].empty? ? "Brand" : params["brand"] %></option>
           <% @car_hash.each do |brand, models| %>
           <option value="<%= brand %>"><%= brand %></option>
           <% end %>
         </select>
 
         <select name="model" class="ui search dropdown" id="model">
-          <option value="">Model</option>
+          <option value=""><%= params["model"].empty? ? "Model" : params["model"] %></option>
         </select>
 
         <select name="min_price" class="ui search dropdown">
-          <option value="">Min price</option>
+          <option value=""><%= params["min_price"].empty? ? "Min price" : params["min_price"] %></option>
           <option value="0">0</option>
           <option value="5000">10000</option>
           <option value="50000">50000</option>
           <option value="100000">100000</option>
         </select>
+
         <select name="max_price" class="ui search dropdown">
-          <option value="">Max price</option>
+          <option value=""><%= params["max_price"].empty? ? "Max price" : params["max_price"] %></option>
           <option value="5000">5000</option>
           <option value="10000">10000</option>
           <option value="50000">50000</option>
