@@ -1,4 +1,5 @@
 class ListingsController < ApplicationController
+  skip_before_filter :authenticate_user!
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   before_action :find_favorite, only: [:index]
   def index
