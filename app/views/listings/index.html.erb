@@ -52,12 +52,13 @@
     <%= cl_image_tag(listing.photos.first.path, width: 300, height: 200, crop:"fill", class: "listing-picture") %>
     <div class="listing-details">
       <h2><%= link_to listing.title, listing_path(listing) %></h2>
-      <h3><%= listing.price %> €</h3>
-      <i class="fa fa-map-marker" aria-hidden="true"></i> <%= listing.city %> <i class="fa fa-tachometer" aria-hidden="true"></i> <%= listing.mileage %> <i class="fa fa-calendar" aria-hidden="true"></i> <%= listing.year %>
+      <h3>€ <%= listing.price %></h3>
+      <i class="fa fa-map-marker" aria-hidden="true"></i> <%= listing.city %><i class="fa fa-tachometer pad-icon" aria-hidden="true"></i> <%= listing.mileage %> km<i class="fa fa-calendar pad-icon" aria-hidden="true"></i> <%= listing.year %>
       <p>
         <%= truncate(listing.description, :length => 500) %>
       </p>
     </div>
+    <% unless current_user.nil? %>
     <div class="listing-actions">
       <div class="edit-actions">
         <% if current_user == listing.user %>
@@ -70,6 +71,7 @@
         <% end %>
       </div>
       <div class="primary-action-button">
+
        <button class="ui primary basic button anim-trigger">Contact Seller</button>
        <% if is_favorite?(listing) %>
        <% favorite = Favorite.where(user_id: current_user, listing_id: listing).first %>
@@ -92,6 +94,7 @@
       <% end %>
     </div>
   </div>
+  <% end %>
 </div>
 <% end %>
 

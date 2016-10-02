@@ -54,10 +54,12 @@
       </table>
 
   <div style="margin-bottom:30px">
-    <%= link_to "Delete", listing_path(@listing),
-    method: :delete,
-    data: { confirm: "Are you sure?" }, class: "ui low-opacity button" %>
-    <%= link_to "Edit", edit_listing_path(@listing), class: "ui low-opacity button" %>
+    <% unless current_user.nil? %>
+      <%= link_to "Delete", listing_path(@listing),
+      method: :delete,
+      data: { confirm: "Are you sure?" }, class: "ui low-opacity button" %>
+      <%= link_to "Edit", edit_listing_path(@listing), class: "ui low-opacity button" %>
+    <% end %>
   </div>
 
   <% if @requested %>
