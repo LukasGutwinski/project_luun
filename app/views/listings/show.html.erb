@@ -24,27 +24,27 @@
             <td>
                 <strong>Brand:</strong>
             </td>
-            <td><%= @listing.brand.name %></td>
+            <td><%= @listing.brand.nil? ? "Undefined" : @listing.brand.name %></td>
           </tr>
           <tr>
             <td><strong>Model:</strong></td>
-            <td><%= @listing.brand_model.name %></td>
+            <td><%= @listing.brand_model.nil? ? "Undefined" : @listing.brand_model.name %></td>
           </tr>
           <tr>
             <td><strong>Mileage:</strong></td>
-            <td><%= @listing.mileage %></td>
+            <td><%= @listing.mileage.nil? ? "Undefined" : @listing.mileage %></td>
           </tr>
           <tr>
             <td><strong>Price:</strong></td>
-            <td><%= @listing.price %></td>
+            <td><%= @listing.price.nil? ? "Undefined" : @listing.price %></td>
           </tr>
           <tr>
             <td><strong>Condition:</strong></td>
-            <td><%= @listing.condition %></td>
+            <td><%= @listing.condition.nil? ? "Undefined" : @listing.condition %></td>
           </tr>
           <tr>
             <td><strong>Origin:</strong></td>
-            <td><%= @listing.origin %></td>
+            <td><%= @listing.origin.nil? ? "Undefined" : @listing.origin %></td>
           </tr>
           <tr>
             <td><strong>Seller:</strong></td>
@@ -65,8 +65,8 @@
   <% else %>
   <div style = "margin-bottom:30px" id="request">
     <%= simple_form_for([ @listing, @request ], remote: true) do |f| %>
-    <%= f.input :comment %>
-    <%= f.button :submit %>
+    <%= f.input :comment, label: "Interested in the car? Message the owner here." %>
+    <%= f.button :submit, "Send message to owner" %>
     <% end %>
   </div>
     <% end %>

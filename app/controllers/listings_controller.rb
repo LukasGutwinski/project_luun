@@ -1,5 +1,5 @@
 class ListingsController < ApplicationController
-  skip_before_filter :authenticate_user!
+  skip_before_filter :authenticate_user!, except: [:new]
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   before_action :find_favorite, only: [:index]
   def index
@@ -32,8 +32,10 @@ class ListingsController < ApplicationController
   def show
     @query_string = session[:query_string]
     @requested = false
-    current_user.requests.each do |request|
-      @requested = true if request.listing == @listing
+    unless current_user.nil?
+      current_user.requests.each do |request|
+        @requested = true if request.listing == @listing
+      end
     end
     if @requested == false
       @request = Request.new
