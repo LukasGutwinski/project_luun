@@ -14,7 +14,7 @@
         </select>
 
         <select name="model" class="ui search dropdown" id="model">
-          <option value=""><%= params["model"].empty? ? "Model" : params["model"] %></option>
+          <option value=""><%= params["model"].nil? || params["model"].empty? ? "Model" : params["model"] %></option>
         </select>
 
         <select name="min_price" class="ui search dropdown">
@@ -44,6 +44,9 @@
 </div>
 
 <div class="light-grey-bg listings-entries">
+  <% if @listings.empty? %>
+    <h2>No cars found.</h2>
+  <% end %>
   <% @listings.each do |listing| %>
   <div class="listing-card">
     <%= cl_image_tag(listing.photos.first.path, width: 300, height: 200, crop:"fill", class: "listing-picture") %>
