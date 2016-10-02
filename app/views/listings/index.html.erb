@@ -184,8 +184,9 @@
       <% @car_hash.each do |brand, models| %>
       if(el.val() === '<%= brand %>') {
         $("#model option").remove();
+        $("#model").append(" <option value=''>Model</option>");
         <% models.each do |model| %>
-        $("#model").append(" <option value='<%= model %>'><%= model %></option>");
+          $("#model").append(" <option value='<%= model %>'><%= model %></option>");
         <% end %>
       }
       <% end %>

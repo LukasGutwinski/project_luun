@@ -5,13 +5,13 @@ class ListingsController < ApplicationController
   def index
     params[:max_price] == "" ? @max_price = 999999 : @max_price = params[:max_price].to_i
     params[:min_price] == "" ? @min_price = 0 : @min_price = params[:min_price].to_i
-    if params[:brand] == ""
+    if params[:brand] == "" || params[:brand].nil?
       @search_term_brand = "*"
     else
       @search_term_brand = "#{params[:brand]}"
     end
 
-    if params[:model] == ""
+    if params[:model] == "" || params[:model].nil?
       @search_term_model = "*"
     else
       @search_term_model = "#{params[:model]}"
