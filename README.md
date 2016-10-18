@@ -8,7 +8,7 @@
 ![Luun landing page](http://pavl.io/luun/s1.png)
 ![Car search result](http://pavl.io/luun/s2.png)
 
-Team:
+###Team:###
 * Phanarat Pak - https://github.com/phanpak
 * Lukas Gutwinski - https://github.com/LukasGutwinski
 * Vladimir Pavlyukov - https://github.com/pavlad
